@@ -57,6 +57,12 @@ public class InstituteServiceImpl implements InstituteService
         return instituteRepository.save(applyPartialUpdates(existingInstitute, instituteRequest));
     }
 
+    @Override
+    public void deleteById(Long id)
+    {
+        instituteRepository.deleteById(id);
+    }
+
     private Institute applyPartialUpdates(Institute institute, InstituteRequest instituteRequest)
     {
         if (instituteRequest.getInstituteName() != null)

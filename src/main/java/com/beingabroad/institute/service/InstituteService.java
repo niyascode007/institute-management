@@ -17,4 +17,6 @@ public interface InstituteService
     Optional<Institute> getById(Long id);
 
     Institute partialUpdate(InstituteRequest instituteRequest, Long id);
+
+    void deleteById(Long id);
 }

@@ -31,9 +31,9 @@ public class InstituteController
     }
 
     @GetMapping("/list")
-    public List<Institute> fetchInstituteList()
+    public ResponseEntity<List<Institute>> fetchInstituteList()
     {
-        return instituteService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(instituteService.getAll());
     }
 
     @GetMapping("/{id}")
@@ -42,7 +42,7 @@ public class InstituteController
         Optional<Institute> instituteOptional = instituteService.getById(id);
         if (instituteOptional.isPresent())
         {
-            return ResponseEntity.status(HttpStatus.CREATED).body(instituteService.getById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(instituteService.getById(id));
         }
         else
         {
@@ -77,6 +77,23 @@ public class InstituteController
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Institute not found for id :" + id);
         }
     }
+
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteInstituteById(@RequestParam Long id)
+    {
+        Optional<Institute> instituteOptional = instituteService.getById(id);
+        if (instituteOptional.isPresent())
+        {
+            instituteService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("deleted");
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Institute not found for id :" + id);
+        }
+    }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
