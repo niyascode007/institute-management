@@ -32,14 +32,15 @@ public class Institute
     @Max(value = 9999999999L, message = "Contact information should be a valid 10-digit number")
     private Long contactInformation;
 
-    @Email(message = "Email should be valid")
+    @Email(message = "Please provide a valid e-mail")
     private String email;
 
     @Min(value = 1800, message = "Establishment year should be after 1800")
+    @Max(value = 2100, message = "Establishment year should be before 2100")
     private Integer establishmentYear;
 
 
-    @URL(message = "Website URL should be valid")
+    @URL(message = "Please provide a valid URL")
     private String websiteUrl;
 
 }
